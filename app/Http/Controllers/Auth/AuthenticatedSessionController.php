@@ -8,6 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\Employee;
+use Illuminate\Support\Facades\Session;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -27,7 +30,11 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
+        $user = Auth::user();
+            if ($user->employee) {
+                Session::put('department', $user->employee->department->name ?? null);
+                Session::put('employee_id', $user->employee->id);
+            }
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

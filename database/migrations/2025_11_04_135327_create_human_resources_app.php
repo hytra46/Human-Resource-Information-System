@@ -31,7 +31,7 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('fullname');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone_number');
             $table->string('address');
             $table->date('birth_date');
@@ -39,9 +39,8 @@ return new class extends Migration
             $table->foreignId('department_id')->constrained('departments');
             $table->foreignId('role_id')->constrained('roles');
             $table->string('status');
-            $table->decimal('salary', 10, 2);
+            $table->integer('salary');
             $table->timestamps();
-            $table->softDeletes();
         });
 
         Schema::create('tasks', function (Blueprint $table) {
@@ -58,10 +57,10 @@ return new class extends Migration
         Schema::create('payroll', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('employees');
-            $table->decimal('salary', 10, 2);
-            $table->decimal('bonuses', 10, 2)->nullable();
-            $table->decimal('deductions', 10, 2)->nullable();
-            $table->decimal('net_salary', 10, 2);
+            $table->integer('salary');
+            $table->integer('bonuses')->nullable();
+            $table->integer('deductions')->nullable();
+            $table->integer('net_salary');
             $table->date('pay_date');
             $table->timestamps();
             $table->softDeletes();

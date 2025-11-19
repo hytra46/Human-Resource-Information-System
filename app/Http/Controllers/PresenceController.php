@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PresenceController extends Controller
 {
     public function index() {
-        if (session('role') == 'HR') {
+        if (session('department') == 'HR') {
             $presences = Presence::all();
         } else {
             $presences = Presence::where('employee_id', session('employee_id'))->get();
@@ -20,11 +20,21 @@ class PresenceController extends Controller
 
     public function create() {
         $employees = Employee::all();
-        return view('presences.create', compact('employees'));
+
+        // untuk non HR → cek apakah sudah check in
+        $todayPresence = null;
+        if (session('department') != 'HR') {
+            $todayPresence = Presence::where('employee_id', session('employee_id'))
+                ->where('date', Carbon::now()->format('Y-m-d'))
+                ->first();
+        }
+
+        return view('presences.create', compact('employees', 'todayPresence'));
     }
 
+
     public function store(Request $request) {
-        if (session('role') == 'HR') {
+        if (session('department') == 'HR') {
 
             $request->validate([
                 'employee_id' => 'required',
@@ -36,18 +46,34 @@ class PresenceController extends Controller
 
             Presence::create($request->all());
         } else {
-            Presence::create([
-                'employee_id' => session('employee_id'),
-                'check_in' => Carbon::now()->format('Y-m-d H:i:s'),
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-                'date' => Carbon::now()->format('Y-m-d'),
-                'status' => 'present'
-            ]);
+
+            // Cek apakah user sudah presensi hari ini
+            $presence = Presence::where('employee_id', session('employee_id'))
+                        ->where('date', Carbon::now()->format('Y-m-d'))
+                        ->first();
+
+            // Jika belum ada presence → Check In
+            if (!$presence) {
+                Presence::create([
+                    'employee_id' => session('employee_id'),
+                    'check_in' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
+                    'date' => Carbon::now()->format('Y-m-d'),
+                    'status' => 'present'
+                ]);
+
+            } else {
+                // Jika sudah check in → maka ini Check Out
+                $presence->update([
+                    'check_out' => Carbon::now()->format('Y-m-d H:i:s')
+                ]);
+            }
         }
 
-        return redirect()->route('presences.index')->with('success', 'Presence recorded successfull.');
+        return redirect()->route('presences.index')->with('success', 'Presence recorded successfully.');
     }
+
 
     public function edit(Presence $presence) {
         $employees = Employee::all();

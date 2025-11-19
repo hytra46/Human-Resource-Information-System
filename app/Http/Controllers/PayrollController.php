@@ -10,7 +10,7 @@ use App\Models\Employee;
 class PayrollController extends Controller
 {
     public function index() {
-        if (session('role') == 'HR') {
+        if (session('department') == 'HR') {
             $payrolls = Payroll::all();
         } else {
             $payrolls = Payroll::where('employee_id', session('employee_id'))->get();

@@ -11,14 +11,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Department</h3>
-                    <p class="text-subtitle text-muted">Handle department data</p>
+                    <h3>Departments</h3>
+                    <p class="text-subtitle text-muted">Handle data departments</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Department</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="{{ route('departments.index') }}">Departments</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Edit</li>
                         </ol>
                     </nav>
@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Edit.
+                        Edit Department
                     </h5>
                 </div>
                 <div class="card-body">
@@ -64,7 +64,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Update Department</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('departments.index') }}" class="btn btn-secondary">Back to List</a>
                     </form>
                 </div>

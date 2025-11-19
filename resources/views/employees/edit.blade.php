@@ -12,13 +12,13 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Employees</h3>
-                    <p class="text-subtitle text-muted">Handle employee data</p>
+                    <p class="text-subtitle text-muted">Handle data employees</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Employee</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="{{ route('employees.index') }}">Employee</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Edit</li>
                         </ol>
                     </nav>
@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Edit.
+                        Edit Employee
                     </h5>
                 </div>
                 <div class="card-body">
@@ -62,13 +62,21 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="" class="form-label">Password (Kosongkan jika tidak ingin ganti)</label>
+                            <input type="password" class="form-control" name="password">
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
                             <label for="" class="form-label">Phone Number</label>
                             <input type="text" class="form-control" name="phone_number" value="{{ old('phone_number', $employee->phone_number) }}" required>
                             @error('phone_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="" class="form-label">Address</label>
                             <textarea name="address" class="form-control @error('address') is-invalid @enderror">{{ old('address', $employee->address) }}</textarea>
@@ -138,7 +146,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Update Employee</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('employees.index') }}" class="btn btn-secondary">Back to List</a>
                     </form>
                 </div>

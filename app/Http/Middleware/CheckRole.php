@@ -15,17 +15,18 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string ...$roles): Response
+    public function handle(Request $request, Closure $next, string ...$departments): Response
     {
         $employeeID = auth()->user()->employee_id;
         $employee = Employee::find($employeeID);
 
-        $request->session()->put('role', $employee->role->title);
+        $request->session()->put('department', $employee->department->name);
         $request->session()->put('employee_id', $employee->id);
 
-        if (!in_array($employee->role->title, $roles)) {
-            abort(403,'Unauthorized action.');
+        if (!in_array($employee->department->name, $departments)) {
+            abort(403, 'Unauthorized action.');
         }
+
         return $next($request);
     }
 }

@@ -12,14 +12,13 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Tasks</h3>
-                    <p class="text-subtitle text-muted">Handle employee tasks</p>
+                    <p class="text-subtitle text-muted">Handle data tasks</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Task</li>
-                            <li class="breadcrumb-item active" aria-current="page">Index</li>
+                            <li class="breadcrumb-item active" aria-current="page">Tasks</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,17 +28,17 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Create
+                        View Tasks
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="d-flex">
-                        @if (session('role') == 'HR')
-                        <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3 ms-auto">New Tasks</a>
+                        @if (session('department') == 'HR')
+                        <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3 ms-auto">New Task</a>
                         @endif
                     </div>
                     @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
+                        <div class="alert alert-success alert-dismissible fade show auto-dismiss-alert"><i class="bi bi-check-circle"></i> {{ session('success') }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
                     @endif
                     <table class="table table-striped" id="table1">
                         <thead>
@@ -71,14 +70,14 @@
                                     @if ($task->status == 'pending')
                                         <a href="{{ route('tasks.done', $task->id) }}" class="btn btn-success btn-sm">Mark as Done</a>
                                     @else
-                                        <a href="{{ route('tasks.pending', $task->id) }}" class="btn btn-warning btn-sm">Mark as Pending</a>
+                                        <a href="{{ route('tasks.pending', $task->id) }}" class="btn btn-secondary btn-sm">Mark as Pending</a>
                                     @endif
-                                    @if (session('role') == 'HR')
+                                    @if (session('department') == 'HR')
                                     <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="post" style="display:inline">
+                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" class="d-inline delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        <button type="button" class="btn btn-danger btn-sm btn-delete">Delete</button>
                                     </form>
                                     @endif
                                 </td>

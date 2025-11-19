@@ -12,13 +12,13 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Leave Requests</h3>
-                    <p class="text-subtitle text-muted">Handle leave request data</p>
+                    <p class="text-subtitle text-muted">Handle data leave requests</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Leave Request</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="{{ route('leave-requests.index') }}">Leave Requests</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Edit</li>
                         </ol>
                     </nav>
@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Edit.
+                        Edit Leave Request
                     </h5>
                 </div>
                 <div class="card-body">
@@ -45,7 +45,7 @@
                     <form action="{{ route('leave-requests.update', $leaveRequest->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        
+
                         <div class="mb-3">
                             <label for="" class="form-label">Employee</label>
                             <select name="employee_id" id="employee_id" class="form-control">

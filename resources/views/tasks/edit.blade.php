@@ -12,13 +12,13 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Tasks</h3>
-                    <p class="text-subtitle text-muted">Handle employee tasks</p>
+                    <p class="text-subtitle text-muted">Handle data tasks</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Task</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href=" {{ route('tasks.index') }}">Tasks</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Edit</li>
                         </ol>
                     </nav>
@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Create.
+                        Edit Task
                     </h5>
                 </div>
                 <div class="card-body">
@@ -46,7 +46,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="" class="form-label">Employee</label>
                             <select name="assigned_to" id="assigned_to" class="form-control @error('assigned_to') is-invalid @enderror">
@@ -87,7 +87,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Update Task</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Back to List</a>
                     </form>
                 </div>

@@ -29,8 +29,8 @@
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="{{ asset('mazer/dist/assets/compiled/svg/logo.svg') }}"
-                                    alt="Logo" srcset=""></a>
+                            <a href="/"><img src="{{ asset('mazer/dist/assets/compiled/svg/logo-hris.png') }}"
+                                    alt="Logo" srcset="" style="max-height: 45px; height: auto; width: auto; object-fit: contain;"></a>
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -72,83 +72,81 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        @if (session('role') === 'HR')
+                        @if (session('department') == 'HR')
                         <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }}">
                             <a href="{{ url('/dashboard') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('tasks') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('tasks*') ? 'active' : '' }}">
                             <a href="{{ url('/tasks') }}" class='sidebar-link'>
                                 <i class="bi bi-check-circle-fill"></i>
                                 <span>Tasks</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('employees') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('employees*') ? 'active' : '' }}">
                             <a href="{{ url('/employees') }}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>Employees</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('departments') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('departments*') ? 'active' : '' }}">
                             <a href="{{ url('/departments') }}" class='sidebar-link'>
                                 <i class="bi bi-briefcase"></i>
                                 <span>Departments</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('roles') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('roles*') ? 'active' : '' }}">
                             <a href="{{ url('/roles') }}" class='sidebar-link'>
                                 <i class="bi bi-tag"></i>
                                 <span>Roles</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('presences') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('presences*') ? 'active' : '' }}">
                             <a href="{{ url('/presences') }}" class='sidebar-link'>
                                 <i class="bi bi-table"></i>
                                 <span>Presences</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('payrolls') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('payrolls*') ? 'active' : '' }}">
                             <a href="{{ url('/payrolls') }}" class='sidebar-link'>
                                 <i class="bi bi-currency-dollar"></i>
                                 <span>Payrolls</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('leave-requests') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('leave-requests*') ? 'active' : '' }}">
                             <a href="{{ url('/leave-requests') }}" class='sidebar-link'>
                                 <i class="bi bi-shift-fill"></i>
                                 <span>Leave Requests</span>
                             </a>
                         </li>
-                        @endif
-
-                        @if (in_array(session('role'), ['Developer', 'Sales', 'Data Entry']))
+                        @else
                         <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }}">
                             <a href="{{ url('/dashboard') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('tasks') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('tasks*') ? 'active' : '' }}">
                             <a href="{{ url('/tasks') }}" class='sidebar-link'>
                                 <i class="bi bi-check-circle-fill"></i>
                                 <span>Tasks</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('presences') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('presences*') ? 'active' : '' }}">
                             <a href="{{ url('/presences') }}" class='sidebar-link'>
                                 <i class="bi bi-table"></i>
                                 <span>Presences</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('payrolls') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('payrolls*') ? 'active' : '' }}">
                             <a href="{{ url('/payrolls') }}" class='sidebar-link'>
                                 <i class="bi bi-currency-dollar"></i>
                                 <span>Payrolls</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('leave-requests') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('leave-requests*') ? 'active' : '' }}">
                             <a href="{{ url('/leave-requests') }}" class='sidebar-link'>
                                 <i class="bi bi-shift-fill"></i>
                                 <span>Leave Requests</span>
@@ -172,11 +170,11 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2023 &copy; Mazer</p>
+                        <p>2025 &copy; PPKPI Jakarta</p>
                     </div>
                     <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by <a href="https://saugi.me">Saugi</a></p>
+                        <p>Crafted with <span class="text-danger"><i class="bi bi-cup-hot-fill icon-mid"></i></span>
+                            by <a href="https://www.linkedin.com/in/hytra46/">Henry Saputra</a></p>
                     </div>
                 </div>
             </footer>
@@ -197,6 +195,10 @@
     <script src="{{ asset('mazer/dist/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/dist/assets/static/js/pages/simple-datatables.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
     <script>
         let date = flatpickr('.date', {
             dateFormat: "Y-m-d",
@@ -213,7 +215,7 @@
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
-                    label: 'total',
+                    label: 'Total',
                     data: [],
                     backgroundColor: 'rgba(63, 82, 227, 1)',
                     borderColor: '#57CAEB'
@@ -221,9 +223,11 @@
             },
             options: {
                 responsive: true,
-                title: {
-                        display:true,
-                        text: 'Latest Presence'
+                maintainAspectRatio: false,   // ← WAJIB untuk responsive sempurna
+                plugins: {
+                    title: {
+                        display: true
+                    }
                 },
                 scales: {
                     y: {
@@ -232,6 +236,7 @@
                 }
             }
         });
+
 
         function updateData() {
             fetch('/dashboard/presence')
@@ -250,6 +255,41 @@
         }
 
         updateData();
+    </script>
+
+    <script>
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.btn-delete');
+        if (!btn) return; // kalau bukan tombol delete, hentikan
+
+        e.preventDefault();
+        const form = btn.closest('form.delete-form');
+        if (!form) return;
+
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // submit form (akan kirim request DELETE sesuai method spoofing)
+                form.submit();
+            }
+        });
+    });
+    </script>
+    <script>
+        setTimeout(function() {
+            let alert = document.querySelector('.auto-dismiss-alert');
+            if (alert) {
+                let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                bsAlert.close();
+            }
+        }, 2500); // 3000 ms = 3 detik
     </script>
 </body>
 

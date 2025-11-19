@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class LeaveRequestController extends Controller
 {
     public function index() {
-        if (session('role') == 'HR') {
+        if (session('department') == 'HR') {
             $leaveRequests = LeaveRequest::all();
         } else {
             $leaveRequests = LeaveRequest::where('employee_id', session('employee_id'))->get();
@@ -25,7 +25,7 @@ class LeaveRequestController extends Controller
     }
 
     public function store(Request $request) {
-        if (session('role') == 'HR') {
+        if (session('department') == 'HR') {
             $request->validate([
                 'employee_id' => 'required',
                 'leave_type' => 'required|string',
